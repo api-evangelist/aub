@@ -1,0 +1,66 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "aub": "https://www.aub.edu.lb/ns#",
+    "dspace": "https://scholarworks.aub.edu.lb/ns#",
+    "schema": "https://schema.org/",
+    "name": "schema:name",
+    "url": "schema:url",
+    "description": "schema:description",
+    "foundingDate": "schema:foundingDate",
+    "location": "schema:location",
+    "department": "schema:department",
+    "CollegeOrUniversity": "schema:CollegeOrUniversity",
+    "EducationalOrganization": "schema:EducationalOrganization",
+    "Library": "schema:Library",
+    "repository": {
+      "@id": "dspace:repository",
+      "@type": "@id"
+    },
+    "community": {
+      "@id": "dspace:community",
+      "@type": "@id"
+    },
+    "collection": {
+      "@id": "dspace:collection",
+      "@type": "@id"
+    },
+    "item": {
+      "@id": "dspace:item",
+      "@type": "@id"
+    },
+    "bitstream": {
+      "@id": "dspace:bitstream",
+      "@type": "@id"
+    },
+    "handle": "dspace:handle",
+    "metadata": "dspace:metadata"
+  },
+  "@type": "CollegeOrUniversity",
+  "@id": "https://www.aub.edu.lb/",
+  "name": "American University of Beirut",
+  "alternateName": "AUB",
+  "url": "https://www.aub.edu.lb/",
+  "foundingDate": "1866",
+  "description": "A private research university in Beirut, Lebanon, founded in 1866. Its public machine-readable developer footprint is centered on the AUB ScholarWorks institutional repository (DSpace 9.1), which exposes a RESTful HAL API and an OAI-PMH 2.0 metadata harvesting endpoint.",
+  "location": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Beirut",
+      "addressCountry": "LB"
+    }
+  },
+  "department": {
+    "@type": "Library",
+    "name": "AUB University Libraries",
+    "url": "https://www.aub.edu.lb/Libraries/",
+    "repository": {
+      "@id": "https://scholarworks.aub.edu.lb/",
+      "@type": "EducationalOrganization",
+      "name": "AUB ScholarWorks",
+      "url": "https://scholarworks.aub.edu.lb/",
+      "description": "AUB ScholarWorks institutional repository running on DSpace 9.1."
+    }
+  }
+}
