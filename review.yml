@@ -1,0 +1,48 @@
+---
+name: American University of Beirut
+description: American University of Beirut public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/aub/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 3
+    summary: >-
+      AUB has no centralized developer portal, but its University Libraries
+      expose real, standards-based machine-readable interfaces. Verified live:
+      the AUB ScholarWorks institutional repository runs DSpace 9.1 with a
+      public HAL REST API at /server/api and an OAI-PMH 2.0 endpoint at
+      /server/oai/request (repositoryName "AUB ScholarWorks", adminEmail
+      scholarworks@aub.edu.lb, earliest datestamp 2012). A Shibboleth SAML 2.0
+      identity provider serves SSO with published metadata. Legacy DSpace paths
+      (/oai/request, /rest/) return 404, consistent with DSpace 7+ which moved
+      these under /server. No fabricated endpoints; SIS and service-desk systems
+      are SSO-gated and not publicly documented APIs.
+    endpoints:
+      - url: https://www.aub.edu.lb/
+        status: 200
+        note: Official institution website.
+      - url: https://scholarworks.aub.edu.lb/
+        status: 200
+        note: AUB ScholarWorks institutional repository (DSpace 9.1 UI).
+      - url: https://scholarworks.aub.edu.lb/server/api
+        status: 200
+        note: DSpace 9.1 REST API root, self-describes as "AUB ScholarWorks".
+      - url: https://scholarworks.aub.edu.lb/server/oai/request?verb=Identify
+        status: 200
+        note: OAI-PMH 2.0 Identify returns repositoryName "AUB ScholarWorks".
+      - url: https://scholarworks.aub.edu.lb/oai/request?verb=Identify
+        status: 404
+        note: Legacy DSpace OAI path not used; DSpace 7+ serves under /server.
+      - url: https://scholarworks.aub.edu.lb/rest/
+        status: 404
+        note: Legacy DSpace 6 REST path not used in DSpace 9.
+      - url: https://libraries.aub.edu.lb/
+        status: 200
+        note: AUB Libraries digital collections gateway.
+      - url: https://idp.aub.edu.lb/idp/shibboleth
+        status: 200
+        note: Shibboleth SAML 2.0 IdP metadata (EntityDescriptor) published.
+      - url: https://github.com/AUB-CMPS
+        status: 200
+        note: AUB Computer Science department GitHub org (course/community code).
