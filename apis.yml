@@ -1,109 +1,365 @@
 ---
 aid: aub
 name: American University of Beirut
+x-type: university
+x-category: Private Research University
 description: >-
-  The American University of Beirut (AUB) is a private research university in
-  Beirut, Lebanon, founded in 1866, and ranked #250 in the QS World University
-  Rankings 2025. AUB's public, machine-readable developer footprint is centered
-  on its University Libraries: the AUB ScholarWorks institutional repository runs
-  on DSpace 9.1, which exposes a public RESTful API and an OAI-PMH 2.0 metadata
-  harvesting endpoint. Authentication across AUB web services is provided by a
-  Shibboleth SAML 2.0 identity provider. AUB does not publish a centralized
-  developer portal; most other institutional systems (SIS, service desk) are
-  gated behind SSO and are not publicly documented APIs.
+  The American University of Beirut is a private, non-profit research university in Beirut, Lebanon,
+  chartered in New York State and founded in 1866. AUB publishes no developer portal, no API gateway
+  and no institution-authored API contract of any kind — every machine-readable surface it operates
+  is a standards-based deployment of third-party software running on AUB's own hosts, and that
+  distinction is the whole of this profile. Four such surfaces were verified live on 2026-09-01. AUB
+  ScholarWorks (scholarworks.aub.edu.lb) is an AUB-hosted DSpace 9.1 institutional repository holding
+  24,318 items across 25 communities, serving an anonymous HAL/JSON REST API and an OAI-PMH 2.0
+  endpoint with thirteen metadata formats. AUB runs its own Shibboleth SAML 2.0 identity provider at
+  idp.aub.edu.lb, scoped aub.edu.lb, and — the strongest institution-operated surface it has — that
+  IdP is registered in InCommon and resolvable through the InCommon MDQ service with the REFEDS
+  Sirtfi entity category asserted. AUB's learning management system is an AUB-hosted Moodle at
+  lms.aub.edu.lb whose Web Services REST endpoint answers anonymously with a structured invalidtoken
+  error and whose LTI 1.3 platform JWKS and token endpoints are publicly reachable. AUB is a Crossref
+  member (id 13566, prefix 10.63014), holds Handle prefix 10938 and is registered in ROR as
+  04pznsd21. Its library discovery and management stack (Ex Libris Primo and Alma), its LibGuides
+  estate (Springshare, site 4901) and its Ellucian Banner student information system are vendor
+  tenancies recorded here as relationships, with no vendor contract saved under AUB's name.
 type: Index
 deliveryModel:
   model: saas
   open_source: false
-  commercial: true
-  callable_host: false
+  commercial: false
+  callable_host: true
   label: Hosted service · you call their endpoint
-  confidence: medium
+  confidence: high
   source:
-  - pricing
-  generated: '2026-08-28'
-  method: derived
+  - probed
+  generated: '2026-09-01'
+  method: probed
 accessModel:
   pricing: free
-  onboarding: unknown
+  onboarding: none
   trial: false
-  try_now: false
-  public: false
-  label: Free
-  confidence: medium
+  try_now: true
+  public: partial
+  label: Free and anonymous for repository read surfaces; every other surface requires an AUB account
+  confidence: high
   source:
-  - plans
-  generated: '2026-07-22'
-  method: derived
-position: Consumer
+  - probed
+  generated: '2026-09-01'
+  method: probed
+position: Consuming
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/aub.png
 url: https://raw.githubusercontent.com/api-evangelist/aub/refs/heads/main/apis.yml
 tags:
-  - Education
-  - Higher Education
   - University
+  - Higher Education
+  - Education
   - Lebanon
   - Middle East
+  - Private Research University
   - Research
-  - Libraries
+  - Research Data
   - Open Access
+  - Libraries
+  - Institutional Repository
+  - Identity Federation
+  - Learning Management
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-09-01'
 specificationVersion: '0.23'
+
+x-coverage:
+  state: covered
+  reason: covered
+  detail: >-
+    Every surface claimed in this profile was probed without credentials on 2026-09-01 and answered.
+    AUB operates no developer portal and authors no API contract, so nothing is saved under
+    openapi/ — the correct outcome for this institution, not a coverage failure. What it does
+    operate is standards-based software on its own hosts, and all of it was verified: the DSpace 9.1
+    REST root and OAI-PMH Identify at scholarworks.aub.edu.lb both return 200 with AUB's own
+    repository identity, the Shibboleth IdP metadata at idp.aub.edu.lb returns a signed SAML 2.0
+    EntityDescriptor scoped aub.edu.lb, that same entityID resolves in the InCommon MDQ service with
+    registrationAuthority https://incommon.org, and the AUB-hosted Moodle answers both a Web
+    Services REST call and an LTI 1.3 JWKS request. Registry memberships were confirmed against the
+    registries themselves rather than from AUB's own claims: Crossref member 13566, Handle prefix
+    10938, ROR 04pznsd21. DataCite was checked and AUB has no provider or client record. Two hosts
+    were probed and found not to be surfaces: api.aub.edu.lb resolves but returns 403 from IIS with
+    no service behind it, and sis.aub.edu.lb (Ellucian Banner on Oracle Cloud) returns a bare Tomcat
+    404. aub.primo.exlibrisgroup.com returns a Primo SPA shell identical for every view id tried, so
+    the tenancy is evidenced by the AUB-specific CNAME into Ex Libris eu06 — a negative control on a
+    nonsense subdomain does not resolve — rather than by the 200.
+  evidence:
+    - url: https://scholarworks.aub.edu.lb/server/api
+      status: 200
+    - url: https://scholarworks.aub.edu.lb/server/oai/request?verb=Identify
+      status: 200
+    - url: https://scholarworks.aub.edu.lb/server/oai/request?verb=ListMetadataFormats
+      status: 200
+    - url: https://scholarworks.aub.edu.lb/server/api/integration/externalsources
+      status: 200
+    - url: https://idp.aub.edu.lb/idp/shibboleth
+      status: 200
+    - url: https://mdq.incommon.org/entities/https%3A%2F%2Fidp.aub.edu.lb%2Fidp%2Fshibboleth
+      status: 200
+    - url: https://lms.aub.edu.lb/webservice/rest/server.php
+      status: 200
+    - url: https://lms.aub.edu.lb/mod/lti/certs.php
+      status: 200
+    - url: https://api.crossref.org/members/13566
+      status: 200
+    - url: https://hdl.handle.net/api/handles/10938/32794
+      status: 200
+    - url: https://api.ror.org/v2/organizations/04pznsd21
+      status: 200
+    - url: https://api.aub.edu.lb/
+      status: 403
+    - url: https://sis.aub.edu.lb/
+      status: 404
+    - url: https://aub.primo.exlibrisgroup.com/
+      status: 200
+
 apis:
   - aid: aub:scholarworks-rest
     name: AUB ScholarWorks DSpace REST API
+    x-operator: institution
     description: >-
-      Public RESTful (HAL) API for the AUB ScholarWorks institutional
-      repository, running on DSpace 9.1. Exposes communities, collections,
-      items, bitstreams, discovery/search, and metadata over HTTP/JSON. The
-      service root self-describes as repository "AUB ScholarWorks".
+      Anonymous HAL/JSON REST API for AUB ScholarWorks, AUB's institutional repository, running
+      DSpace 9.1 on AUB's own host. The service root self-describes as dspaceName "AUB ScholarWorks",
+      dspaceServer https://scholarworks.aub.edu.lb/server, dspaceVersion "DSpace 9.1", and links
+      roughly seventy sub-resources covering communities, collections, items, bundles, bitstreams,
+      discovery/search, browse indexes, submission configuration and workflow. Probed 2026-09-01:
+      25 communities and 24,318 discoverable items, with /server/api/authn/status returning
+      authenticated false — the read surface is genuinely open. The deployment is AUB's; the contract
+      is DSpace's, shipped identically by every DSpace 9 institution, so no OpenAPI is saved under
+      AUB's name. Errors are returned as application/problem+json.
     humanURL: https://scholarworks.aub.edu.lb/
     baseURL: https://scholarworks.aub.edu.lb/server/api
     tags: [ Repository, DSpace, Research, Open Access, Libraries, REST ]
     properties:
       - type: Documentation
         url: https://aub.edu.lb.libguides.com/AUB-Scholarworks
-      - type: Documentation
-        url: https://wiki.lyrasis.org/display/DSDOC9x/REST+API
+      - type: ResearchRepository
+        url: https://scholarworks.aub.edu.lb/
+      - type: Conformance
+        url: conformance/aub-conformance.yml
+      - type: Authentication
+        url: authentication/aub-authentication.yml
+
   - aid: aub:scholarworks-oai
     name: AUB ScholarWorks OAI-PMH
+    x-operator: institution
     description: >-
-      OAI-PMH 2.0 metadata harvesting endpoint for the AUB ScholarWorks
-      institutional repository (DSpace 9.1). Supports the standard OAI verbs
-      (Identify, ListRecords, ListSets, GetRecord, etc.) and exposes scholarly
-      output of the AUB community for harvesting by aggregators.
+      OAI-PMH 2.0 metadata harvesting endpoint for AUB ScholarWorks. Identify returns repositoryName
+      "AUB ScholarWorks", repositoryIdentifier scholarworks.aub.edu.lb, adminEmail
+      scholarworks@aub.edu.lb, earliestDatestamp 2012-06-11T12:20:20Z, granularity
+      YYYY-MM-DDThh:mm:ssZ and deletedRecord transient. Thirteen metadata formats are served —
+      oai_dc, qdc, dim, xoai, mods, mets, didl, ore, rdf, marc, rioxx, uketd_dc and etdms — which is
+      an aggregator-oriented configuration rather than a bare DSpace default. ListSets exposes AUB's
+      own communities (AUB Press, the Archaeological Museum, AUBotanic, the Asfari Institute and
+      others) as harvestable sets. This is the single most useful anonymous machine-readable surface
+      AUB operates.
     humanURL: https://scholarworks.aub.edu.lb/
     baseURL: https://scholarworks.aub.edu.lb/server/oai/request
     tags: [ OAI-PMH, Metadata, Harvesting, Repository, Open Access, Libraries ]
     properties:
       - type: Documentation
         url: https://aub.edu.lb.libguides.com/AUB-Scholarworks
+      - type: Conformance
+        url: conformance/aub-conformance.yml
+
   - aid: aub:shibboleth-idp
     name: AUB Shibboleth Identity Provider (SAML 2.0)
+    x-operator: institution
     description: >-
-      AUB's institutional single sign-on is provided by a Shibboleth SAML 2.0
-      identity provider. The SAML metadata is published at the entity endpoint
-      and is used to federate access to AUB web services. This is an
-      authentication/identity standard endpoint rather than a public data API.
-    humanURL: https://servicedesk.aub.edu.lb/TDClient/Requests/ServiceDet?ID=30424
+      AUB's own Shibboleth SAML 2.0 identity provider, the front door to campus single sign-on. The
+      metadata endpoint serves a signed EntityDescriptor with entityID
+      https://idp.aub.edu.lb/idp/shibboleth, shibmd:Scope aub.edu.lb, mdui:DisplayName "American
+      University of Beirut", separate back-channel and front-channel signing certificates, and four
+      SingleSignOnService bindings (Shibboleth SSO, SAML2 POST, SAML2 Redirect, SAML2
+      POST-SimpleSign). AUB ScholarWorks is wired to it — /server/api/authn/shibboleth returns a 302
+      into the repository. Institution-operated by definition, machine-readable, and the class of
+      surface this cohort most consistently fails to catalogue.
+    humanURL: https://servicedesk.aub.edu.lb/TDClient/1398/Portal/Requests/Service/30424/Shibboleth
     baseURL: https://idp.aub.edu.lb/idp/shibboleth
-    tags: [ Identity, Authentication, SAML, Shibboleth, SSO ]
+    tags: [ Identity, Authentication, SAML, Shibboleth, SSO, Identity Federation ]
+    properties:
+      - type: IdentityFederation
+        url: https://idp.aub.edu.lb/idp/shibboleth
+      - type: Documentation
+        url: https://servicedesk.aub.edu.lb/TDClient/1398/Portal/Requests/Service/30424/Shibboleth
+      - type: Conformance
+        url: conformance/aub-conformance.yml
+
+  - aid: aub:incommon-federation
+    name: InCommon federation registration (AUB IdP)
+    x-operator: federation
+    description: >-
+      AUB's identity provider is registered in InCommon, the United States research and education
+      identity federation, and is resolvable through the InCommon per-entity metadata (MDQ) service.
+      Probed 2026-09-01: the MDQ endpoint returns an 11KB signed EntityDescriptor for
+      https://idp.aub.edu.lb/idp/shibboleth with mdrpi registrationAuthority https://incommon.org,
+      OrganizationDisplayName "American University of Beirut", and two entity categories asserted —
+      https://refeds.org/sirtfi (the REFEDS security incident response trust framework) and
+      http://id.incommon.org/category/registered-by-incommon. A federation is shared by definition;
+      the IdP behind this entry is AUB's, which is why the relationship is recorded rather than the
+      federation's contract.
+    humanURL: https://mdq.incommon.org/
+    baseURL: https://mdq.incommon.org/entities/https%3A%2F%2Fidp.aub.edu.lb%2Fidp%2Fshibboleth
+    tags: [ Identity Federation, InCommon, SAML, Shibboleth, MDQ, Sirtfi ]
+    properties:
+      - type: IdentityFederation
+        url: https://mdq.incommon.org/entities/https%3A%2F%2Fidp.aub.edu.lb%2Fidp%2Fshibboleth
+      - type: Conformance
+        url: conformance/aub-conformance.yml
+
+  - aid: aub:moodle-webservices
+    name: AUB Moodle Web Services (REST)
+    x-operator: institution
+    description: >-
+      AUB's learning management system is a Moodle instance the university hosts itself at
+      lms.aub.edu.lb (moodle.aub.edu.lb is a CNAME to it), fronted by an AWS load balancer in the
+      AUB account. The Moodle Web Services REST endpoint is enabled and answers an anonymous call
+      with a structured XML fault — ERRORCODE invalidtoken, class core\exception\moodle_exception —
+      which proves the service is deployed and token-gated rather than absent. Tokens are issued only
+      to AUB accounts, so there is no public data here; the surface is catalogued because it is a
+      live, institution-operated, machine-readable API endpoint. The contract is Moodle's, shipped by
+      every Moodle operator, so none is saved under AUB's name.
+    humanURL: https://lms.aub.edu.lb/
+    baseURL: https://lms.aub.edu.lb/webservice/rest/server.php
+    tags: [ Learning Management, Moodle, LMS, REST, Authenticated ]
+    properties:
+      - type: Authentication
+        url: authentication/aub-authentication.yml
+
+  - aid: aub:moodle-lti-platform
+    name: AUB Moodle LTI 1.3 platform endpoints
+    x-operator: institution
+    description: >-
+      AUB's Moodle is configured as an IMS Global LTI 1.3 / LTI Advantage platform, and two of its
+      platform endpoints are publicly reachable without credentials. The public JWKS at
+      /mod/lti/certs.php returns a live RSA signing key (kty RSA, alg RS256, kid c667610e9cb821c8cc49),
+      and the OAuth 2.0 token endpoint at /mod/lti/token.php returns a JSON invalid_request error to
+      an empty POST. Together these are what an external learning tool needs to establish an LTI 1.3
+      trust relationship with AUB, and they are direct machine-readable evidence of LTI conformance
+      on an education-regime institution — not a prose claim.
+    humanURL: https://lms.aub.edu.lb/
+    baseURL: https://lms.aub.edu.lb/mod/lti/certs.php
+    tags: [ LTI, LTI Advantage, Learning Management, Moodle, JWKS, OAuth ]
+    properties:
+      - type: Conformance
+        url: conformance/aub-conformance.yml
+
+  - aid: aub:crossref-member
+    name: Crossref membership (AUB)
+    x-operator: registry
+    description: >-
+      AUB is a Crossref member in its own right — member id 13566, primary name "American University
+      of Beirut", DOI prefix 10.63014. Probed against the Crossref REST API on 2026-09-01, the
+      membership is real but barely used: 5 current DOIs and no backfile. Recorded as the registry
+      membership it is; Crossref's own API contract is Crossref's and is not saved here.
+    humanURL: https://www.crossref.org/
+    baseURL: https://api.crossref.org/members/13566
+    tags: [ Registry, Crossref, DOI, Scholarly Publishing, Membership ]
     properties:
       - type: Documentation
-        url: https://servicedesk.aub.edu.lb/TDClient/Requests/ServiceDet?ID=30424
+        url: https://api.crossref.org/members/13566
+
+  - aid: aub:handle-prefix
+    name: Handle System prefix 10938 (AUB ScholarWorks)
+    x-operator: registry
+    description: >-
+      AUB holds Handle System prefix 10938, the persistent identifier namespace behind every AUB
+      ScholarWorks record — the repository's OAI sample identifier is
+      oai:scholarworks.aub.edu.lb:10938/1234. Verified 2026-09-01 against the Handle proxy REST API:
+      handle 10938/32794 resolves with responseCode 1 to
+      https://scholarworks.aub.edu.lb/handle/10938/32794, which in turn 200s into the live
+      ScholarWorks item view, so the prefix is registered, live and pointed at AUB's own host. A
+      registry AUB is registered in, not a contract AUB wrote.
+    humanURL: https://hdl.handle.net/10938/32794
+    baseURL: https://hdl.handle.net/api/handles/10938/32794
+    tags: [ Registry, Handle, Persistent Identifiers, Repository ]
+    properties:
+      - type: Documentation
+        url: https://hdl.handle.net/api/handles/10938/32794
+
+  - aid: aub:ror-record
+    name: ROR registration (AUB)
+    x-operator: registry
+    description: >-
+      The American University of Beirut is registered in the Research Organization Registry as
+      https://ror.org/04pznsd21. Three related AUB entities carry their own ROR identifiers — AUB
+      Medical Center (00wmm6v75), AUB Mediterraneo (05x6psc41) and the AUB New York Office
+      (05t3agv77) — which matters for any attribution work across this institution, because
+      publications and datasets split across them. AUB's own DSpace deployment exposes ror as one of
+      its 31 configured external metadata sources.
+    humanURL: https://ror.org/04pznsd21
+    baseURL: https://api.ror.org/v2/organizations/04pznsd21
+    tags: [ Registry, ROR, Organization Identifiers, Research ]
+    properties:
+      - type: Documentation
+        url: https://api.ror.org/v2/organizations/04pznsd21
+
+  - aid: aub:library-discovery
+    name: AUB Libraries discovery and management (Ex Libris Primo / Alma)
+    x-operator: tenant
+    description: >-
+      AUB's library discovery and library services platform are Ex Libris products under AUB-specific
+      tenancies: aub.primo.exlibrisgroup.com and aub.alma.exlibrisgroup.com both CNAME into Ex
+      Libris's eu06 region. A negative control confirms these are not wildcards — a nonsense
+      institution subdomain on the same parent does not resolve — so the per-institution tenancy is
+      real. The Primo host returns 200 with an identical 4,784-byte SPA shell for every view id
+      tried, so no view could be confirmed from the body; that is a limit on our probe, not evidence
+      of a service. The data is AUB's, the contract is Ex Libris's, and no vendor specification is
+      saved under AUB's name.
+    humanURL: https://aub.primo.exlibrisgroup.com/
+    tags: [ Library, Discovery, Ex Libris, Primo, Alma, Tenant ]
+    properties:
+      - type: LibraryCatalog
+        url: https://aub.primo.exlibrisgroup.com/
+
+  - aid: aub:libguides
+    name: AUB Libraries LibGuides (Springshare)
+    x-operator: tenant
+    description: >-
+      AUB Libraries runs a Springshare LibGuides estate at aub.edu.lb.libguides.com under site_id
+      4901 — the guides are AUB-authored (the ScholarWorks guide, an Artificial Intelligence guide,
+      the A-Z database list) and the platform is Springshare's. The LibGuides CMS API v1.2 exists for
+      site 4901 on both lgapi-us and lgapi-eu but returns HTTP 401 to an anonymous request, so the
+      tenancy is confirmed and the data is not public. Recorded as a relationship; Springshare's
+      contract belongs to Springshare.
+    humanURL: https://aub.edu.lb.libguides.com/
+    baseURL: https://lgapi-eu.libapps.com/1.2/guides?site_id=4901
+    tags: [ Library, LibGuides, Springshare, Documentation, Tenant ]
+    properties:
+      - type: Documentation
+        url: https://aub.edu.lb.libguides.com/AUB-Scholarworks
+      - type: Documentation
+        url: https://aub.edu.lb.libguides.com/AI
+
 common:
-  - type: DomainSecurity
-    url: security/aub-domain-security.yml
   - type: Website
     url: https://www.aub.edu.lb/
-  - type: GitHub
+  - type: PrivacyPolicy
+    url: https://www.aub.edu.lb/Pages/privacy.aspx
+  - type: Support
+    url: https://servicedesk.aub.edu.lb/TDClient/1398/Portal/Home/
+  - type: Documentation
+    url: https://aub.edu.lb.libguides.com/AUB-Scholarworks
+  - type: GitHubOrganization
     url: https://github.com/AUB-CMPS
   - type: LinkedIn
     url: https://www.linkedin.com/school/american-university-of-beirut
-  - type: Authentication
+  - type: ResearchRepository
+    url: https://scholarworks.aub.edu.lb/
+  - type: LibraryCatalog
+    url: https://aub.primo.exlibrisgroup.com/
+  - type: IdentityFederation
     url: https://idp.aub.edu.lb/idp/shibboleth
+  - type: Authentication
+    url: authentication/aub-authentication.yml
+  - type: Conformance
+    url: conformance/aub-conformance.yml
+  - type: DomainSecurity
+    url: security/aub-domain-security.yml
   - type: Plans
     url: plans/aub-plans-pricing.yml
   - type: RateLimits
