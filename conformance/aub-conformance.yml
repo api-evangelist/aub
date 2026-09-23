@@ -1,0 +1,199 @@
+---
+name: American University of Beirut — Domain Standard Conformance
+description: >-
+  Education-regime standard conformance for the American University of Beirut, established by live,
+  credential-free probes of AUB-operated hosts on 2026-09-01. Reward-only: a standard appears under
+  `conformance` only where an anonymous request returned a response that proves the deployment, with
+  the exact location of the proof recorded. Every education-regime standard with no such evidence is
+  listed under `not_found` rather than left implicit, so an absence here is a measurement and not an
+  oversight. Where the software behind a conforming endpoint is a third party's (DSpace, Moodle,
+  Shibboleth), `operator` records that AUB runs the deployment while the protocol implementation is
+  the product's — AUB is credited with operating a conformant endpoint, never with authoring the
+  contract.
+generated: '2026-09-01'
+method: probed
+source: >-
+  Live anonymous probes of scholarworks.aub.edu.lb, idp.aub.edu.lb, lms.aub.edu.lb and
+  mdq.incommon.org, plus registry lookups against api.crossref.org, api.ror.org, api.datacite.org and
+  hdl.handle.net, 2026-09-01.
+x-operator: institution
+url: https://raw.githubusercontent.com/api-evangelist/aub/main/conformance/aub-conformance.yml
+regime: education
+
+conformance:
+  - standard: oai-pmh
+    status: conformant
+    version: '2.0'
+    operator: institution
+    evidence:
+      url: https://scholarworks.aub.edu.lb/server/oai/request?verb=Identify
+      status: 200
+      location: OAI-PMH/Identify/protocolVersion
+      value: '2.0'
+      detail: >-
+        repositoryName "AUB ScholarWorks", baseURL
+        https://scholarworks.aub.edu.lb/server/oai/request, repositoryIdentifier
+        scholarworks.aub.edu.lb, adminEmail scholarworks@aub.edu.lb, earliestDatestamp
+        2012-06-11T12:20:20Z, granularity YYYY-MM-DDThh:mm:ssZ, deletedRecord transient, and an
+        oai-identifier description block with sample identifier oai:scholarworks.aub.edu.lb:10938/1234.
+    supporting:
+      - url: https://scholarworks.aub.edu.lb/server/oai/request?verb=ListMetadataFormats
+        status: 200
+        location: OAI-PMH/ListMetadataFormats/metadataFormat/metadataPrefix
+        value: didl, mods, ore, mets, xoai, dim, rioxx, uketd_dc, qdc, oai_dc, rdf, marc, etdms
+        detail: >-
+          Thirteen metadata formats. rioxx, uketd_dc and etdms are aggregator- and thesis-oriented
+          additions rather than the bare DSpace default set, which indicates a deliberately
+          configured harvesting surface.
+      - url: https://scholarworks.aub.edu.lb/server/oai/request?verb=ListSets
+        status: 200
+        location: OAI-PMH/ListSets/set/setName
+        value: Archaeological Museum, Asfari Institute for Civil Society and Citizenship, AUB Botanic Garden (AUBotanic), AUB Press, Center For Advanced Ma…
+        detail: AUB's own communities are exposed as harvestable OAI sets under com_10938_* setSpecs.
+
+  - standard: saml
+    status: conformant
+    version: '2.0'
+    operator: institution
+    evidence:
+      url: https://idp.aub.edu.lb/idp/shibboleth
+      status: 200
+      location: md:EntityDescriptor/md:IDPSSODescriptor/@protocolSupportEnumeration
+      value: urn:oasis:names:tc:SAML:2.0:protocol
+      detail: >-
+        entityID https://idp.aub.edu.lb/idp/shibboleth, mdui:DisplayName and mdui:Description
+        "American University of Beirut", separate back-channel and front-channel X.509 signing
+        certificates, and four SingleSignOnService bindings — Shibboleth SSO, SAML2 POST, SAML2
+        Redirect and SAML2 POST-SimpleSign.
+
+  - standard: shibboleth
+    status: conformant
+    operator: institution
+    evidence:
+      url: https://idp.aub.edu.lb/idp/shibboleth
+      status: 200
+      location: md:IDPSSODescriptor/md:Extensions/shibmd:Scope
+      value: aub.edu.lb
+      detail: >-
+        The shibmd:Scope extension (regexp false, aub.edu.lb) identifies this as a Shibboleth IdP
+        rather than a generic SAML endpoint, and it is the scope AUB asserts across the federation.
+    supporting:
+      - url: https://mdq.incommon.org/entities/https%3A%2F%2Fidp.aub.edu.lb%2Fidp%2Fshibboleth
+        status: 200
+        location: md:EntityDescriptor/md:Extensions/mdrpi:RegistrationInfo/@registrationAuthority
+        value: https://incommon.org
+        detail: >-
+          AUB's IdP is registered in InCommon and served by the InCommon per-entity MDQ service as an
+          11,307-byte signed EntityDescriptor, with OrganizationDisplayName "American University of
+          Beirut" and two entity categories asserted — https://refeds.org/sirtfi and
+          http://id.incommon.org/category/registered-by-incommon.
+      - url: https://scholarworks.aub.edu.lb/server/api/authn/shibboleth
+        status: 302
+        location: HTTP Location header
+        value: https://scholarworks.aub.edu.lb
+        detail: >-
+          AUB ScholarWorks has the DSpace Shibboleth authentication method enabled and wired to the
+          institutional IdP, tying the repository to the same identity infrastructure.
+
+  - standard: lti
+    status: conformant
+    version: '1.3'
+    operator: institution
+    evidence:
+      url: https://lms.aub.edu.lb/mod/lti/certs.php
+      status: 200
+      location: keys[0]
+      value: 'kty RSA, alg RS256, kid c667610e9cb821c8cc49'
+      detail: >-
+        AUB's self-hosted Moodle at lms.aub.edu.lb publishes a live LTI 1.3 platform JWKS without
+        credentials — the public key an external learning tool uses to validate AUB-issued id_tokens.
+    supporting:
+      - url: https://lms.aub.edu.lb/mod/lti/token.php
+        status: 400
+        location: response body
+        value: '{"error":"invalid_request"}'
+        detail: >-
+          The LTI Advantage OAuth 2.0 client-credentials token endpoint is deployed and returns a
+          conformant OAuth error to an empty POST rather than a 404, completing the LTI 1.3 platform
+          endpoint pair.
+
+  - standard: crossref
+    status: conformant
+    operator: institution
+    evidence:
+      url: https://api.crossref.org/members/13566
+      status: 200
+      location: message.primary-name / message.prefixes
+      value: 'American University of Beirut; prefix 10.63014'
+      detail: >-
+        AUB is a Crossref member in its own right, id 13566, with DOI prefix 10.63014. The
+        membership is real but lightly used — counts report 5 current DOIs and 0 backfile — which is
+        recorded here as measured rather than smoothed over.
+    supporting:
+      - url: https://scholarworks.aub.edu.lb/server/api/integration/externalsources
+        status: 200
+        location: _embedded.externalsources[].id
+        value: crossref
+        detail: >-
+          Crossref is one of 31 external metadata sources configured and publicly readable on AUB's
+          DSpace deployment. Deployed integration, not AUB-authored conformance work.
+
+  - standard: orcid
+    status: deployed
+    operator: institution
+    evidence:
+      url: https://scholarworks.aub.edu.lb/server/api/integration/externalsources
+      status: 200
+      location: _embedded.externalsources[].id
+      value: orcid, orcidWorks
+      detail: >-
+        AUB ScholarWorks exposes both ORCID person and ORCID works external-source integrations on an
+        unauthenticated endpoint. Status is `deployed` rather than `conformant` because this is a
+        DSpace-provided integration AUB has enabled and left publicly readable — evidence of an
+        operating ORCID integration, not of an AUB-authored ORCID interface.
+
+  - standard: datacite
+    status: deployed
+    operator: institution
+    evidence:
+      url: https://scholarworks.aub.edu.lb/server/api/integration/externalsources
+      status: 200
+      location: _embedded.externalsources[].id
+      value: datacite, dataciteProject
+      detail: >-
+        DataCite and DataCite Project external sources are enabled on AUB's DSpace. Note the
+        qualification: AUB has NO DataCite provider or client record — api.datacite.org returns no
+        provider and no client matching Beirut — so AUB consumes DataCite metadata but does not mint
+        DataCite DOIs. Its persistent identifiers are Handles under prefix 10938 and, for
+        publications, Crossref DOIs under 10.63014.
+
+not_found:
+  - standard: scim
+    detail: >-
+      No SCIM 2.0 endpoint found. /ServiceProviderConfig was not reachable on any AUB host and no
+      provisioning interface is documented publicly.
+  - standard: oneroster
+    detail: >-
+      Not found. AUB's student information system is Ellucian Banner (sis.aub.edu.lb, an AUB-named
+      host on Oracle Cloud) which returns a bare Tomcat 404 anonymously; no OneRoster interface is
+      exposed or documented.
+  - standard: ed-fi
+    detail: Not found — Ed-Fi is a US K-12 data ecosystem with no presence in Lebanese higher education.
+  - standard: caliper
+    detail: >-
+      Not found. AUB's Moodle ships a Caliper-capable logstore in some configurations, but no Caliper
+      endpoint or event-store configuration is publicly reachable, so no claim is made.
+  - standard: qti
+    detail: >-
+      Not found. No QTI import/export or assessment interface is publicly exposed on lms.aub.edu.lb.
+
+notes:
+  - >-
+    AUB authors no API contract of its own, so nothing in this file is read from an OpenAPI. Every
+    entry is read from a live response body or header at the location named, which is the only form
+    of evidence available for an institution whose entire machine-readable footprint is
+    standards-based deployments of other people's software on its own hosts.
+  - >-
+    api.aub.edu.lb resolves to an AUB host but returns HTTP 403 from IIS with no service behind it,
+    and was not counted as a surface. Its name makes it the single most likely place for a future
+    AUB-operated API program to appear.
