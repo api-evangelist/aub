@@ -1,0 +1,322 @@
+generated: '2026-10-20'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 29
+  own: 15
+  other_domain: 7
+  platform: 7
+  roles:
+  - api
+  - docs
+  - other
+  - source
+  - support
+  - website
+hosts:
+- host: 150.aub.edu.lb
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: aub.edu.lb
+  role: other
+  relation: own
+- host: alumni.aub.edu.lb
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: aub.edu.lb
+  role: other
+  relation: own
+- host: api.crossref.org
+  found_by:
+  - apis[]
+  - contract-discovery
+  types: []
+  serves:
+  - api
+  registrable_domain: crossref.org
+  role: api
+  relation: platform
+- host: api.edu.lb
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: api.edu.lb
+  role: api
+  relation: other-domain
+- host: api.exlibrisgroup.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: exlibrisgroup.com
+  role: api
+  relation: other-domain
+- host: api.libapps.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: libapps.com
+  role: api
+  relation: other-domain
+- host: api.ror.org
+  found_by:
+  - apis[]
+  - contract-discovery
+  - vendor-detect
+  types: []
+  serves:
+  - api
+  - api-gateway
+  vendor: aws-api-gateway
+  registrable_domain: ror.org
+  role: api
+  relation: platform
+- host: aub.edu.lb
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: aub.edu.lb
+  role: other
+  relation: own
+- host: aub.edu.lb.libguides.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - docs-index
+  - well-known
+  types:
+  - Documentation
+  serves:
+  - docs
+  registrable_domain: libguides.com
+  role: docs
+  relation: other-domain
+- host: aub.primo.exlibrisgroup.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - well-known
+  types:
+  - LibraryCatalog
+  serves:
+  - docs
+  registrable_domain: exlibrisgroup.com
+  role: other
+  relation: other-domain
+- host: boldly.aub.edu.lb
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: aub.edu.lb
+  role: other
+  relation: own
+- host: careers.aub.edu.lb
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: aub.edu.lb
+  role: other
+  relation: own
+- host: ghi.aub.edu.lb
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: aub.edu.lb
+  role: other
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: hdl.handle.net
+  found_by:
+  - apis[]
+  - vendor-detect
+  types: []
+  serves:
+  - api
+  - docs
+  - cdn
+  vendor: cloudflare
+  registrable_domain: handle.net
+  role: other
+  relation: platform
+- host: idp.aub.edu.lb
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - well-known
+  types:
+  - IdentityFederation
+  serves:
+  - api
+  registrable_domain: aub.edu.lb
+  role: other
+  relation: own
+- host: join.aub.edu.lb
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: aub.edu.lb
+  role: other
+  relation: own
+- host: lgapi-eu.libapps.com
+  found_by:
+  - apis[]
+  - probed
+  - well-known
+  types: []
+  serves:
+  - api
+  registrable_domain: libapps.com
+  role: other
+  relation: other-domain
+- host: lms.aub.edu.lb
+  found_by:
+  - apis[]
+  - probed
+  - site-links
+  - well-known
+  types: []
+  serves:
+  - api
+  - docs
+  registrable_domain: aub.edu.lb
+  role: other
+  relation: own
+- host: mdq.incommon.org
+  found_by:
+  - apis[]
+  - probed
+  - well-known
+  - vendor-detect
+  types: []
+  serves:
+  - api
+  - docs
+  - cdn
+  vendor: cloudfront
+  registrable_domain: incommon.org
+  role: other
+  relation: other-domain
+- host: online.aub.edu.lb
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: aub.edu.lb
+  role: other
+  relation: own
+- host: ror.org
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - docs
+  registrable_domain: ror.org
+  role: other
+  relation: platform
+- host: scholarworks.aub.edu.lb
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - site-links
+  - well-known
+  types:
+  - ResearchRepository
+  serves:
+  - api
+  - docs
+  registrable_domain: aub.edu.lb
+  role: other
+  relation: own
+- host: servicedesk.aub.edu.lb
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - well-known
+  types:
+  - Support
+  serves:
+  - docs
+  registrable_domain: aub.edu.lb
+  role: support
+  relation: own
+- host: sites.aub.edu.lb
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: aub.edu.lb
+  role: other
+  relation: own
+- host: website.aub.edu.lb
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: aub.edu.lb
+  role: other
+  relation: own
+- host: www.aub.edu.lb
+  found_by:
+  - pointer
+  - probed
+  types:
+  - Newsroom
+  - Website
+  - PrivacyPolicy
+  serves: []
+  registrable_domain: aub.edu.lb
+  role: website
+  relation: own
+- host: www.crossref.org
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - docs
+  registrable_domain: crossref.org
+  role: other
+  relation: platform
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform

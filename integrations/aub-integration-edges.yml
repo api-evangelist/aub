@@ -1,3 +1,21 @@
+generated: '2026-10-20'
+method: searched
+source:
+- https://zapier.com/apps/aub/integrations
+- https://zapier.com/apps/american-university-of-beirut/integrations
+- https://n8n.io/integrations/aub/
+- https://composio.dev/toolkits/aub
+- https://monid.ai/tools/aub
+checked:
+- https://technical.edugain.org/api.php?action=list_entities&type=idp&format=json
+- https://technical.edugain.org/api.php?action=list_entities&type=sp&format=json
+- https://composio.dev/toolkits/aub
+- https://monid.ai/tools/aub
+- https://n8n.io/integrations/aub/
+- https://zapier.com/apps/american-university-of-beirut/integrations
+- https://zapier.com/apps/aub/integrations
+summary: null
+marketplace_apps: []
 edges:
 - partner_name: eduGAIN
   partner: null
@@ -30,8 +48,4 @@ edges:
     detected: '2026-10-15'
   detected_by: sweep-higher-ed.py
   first_seen: '2026-10-15'
-generated: '2026-10-15'
-method: searched
-checked:
-- https://technical.edugain.org/api.php?action=list_entities&type=idp&format=json
-- https://technical.edugain.org/api.php?action=list_entities&type=sp&format=json
+templates: []
