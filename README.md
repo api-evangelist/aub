@@ -1,4 +1,4 @@
-# American University of Beirut (aub)
+# American University of Beirut
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,48 +64,121 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-The American University of Beirut (AUB) is a private research university in Beirut, Lebanon, founded in 1866 and ranked #250 in the QS World University Rankings 2025. This repository catalogs AUB's public, machine-readable developer/API footprint as an [APIs.json](https://apisjson.org) provider profile. AUB has no centralized developer portal; its public APIs are centered on the University Libraries' ScholarWorks repository (DSpace 9.1) and a Shibboleth SAML identity provider.
+The American University of Beirut is a private, non-profit research university in Beirut, Lebanon, chartered in New York State and founded in 1866. AUB publishes no developer portal, no API gateway and no institution-authored API contract of any kind — every machine-readable surface it operates is a standards-based deployment of third-party software running on AUB's own hosts, and that distinction is the whole of this profile. Four such surfaces were verified live on 2026-09-01. AUB ScholarWorks (scholarworks.aub.edu.lb) is an AUB-hosted DSpace 9.1 institutional repository holding 24,318 items across 25 communities, serving an anonymous HAL/JSON REST API and an OAI-PMH 2.0 endpoint with thirteen metadata formats. AUB runs its own Shibboleth SAML 2.0 identity provider at idp.aub.edu.lb, scoped aub.edu.lb, and — the strongest institution-operated surface it has — that IdP is registered in InCommon and resolvable through the InCommon MDQ service with the REFEDS Sirtfi entity category asserted. AUB's learning management system is an AUB-hosted Moodle at lms.aub.edu.lb whose Web Services REST endpoint answers anonymously with a structured invalidtoken error and whose LTI 1.3 platform JWKS and token endpoints are publicly reachable. AUB is a Crossref member (id 13566, prefix 10.63014), holds Handle prefix 10938 and is registered in ROR as 04pznsd21. Its library discovery and management stack (Ex Libris Primo and Alma), its LibGuides estate (Springshare, site 4901) and its Ellucian Banner student information system are vendor tenancies recorded here as relationships, with no vendor contract saved under AUB's name.
 
-- APIs.json: https://raw.githubusercontent.com/api-evangelist/aub/refs/heads/main/apis.yml
-- Naftiko Run: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=aub-api-evangelist&utm_content=repo
+**Areas:** University · Higher Education · Education · Lebanon · Middle East · Private Research University · Research · Research Data · Open Access · Library · Institutional Repository · Identity Federation
 
-## Type
+## American University of Beirut on APIs.io
 
-Index / Consumer / 3rd-Party
+Everything profiled for American University of Beirut is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/aub/](https://apis.io/providers/aub/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (11)
 
-Education, Higher Education, University, Lebanon, Middle East, Research, Libraries, Open Access
+- [AUB ScholarWorks DSpace REST API](https://apis.io/apis/aub/scholarworks-rest/) — Anonymous HAL/JSON REST API for AUB ScholarWorks, AUB's institutional repository, running DSpace 9.1 on AUB's own host. The service root self-describes as…
+- [AUB ScholarWorks OAI-PMH](https://apis.io/apis/aub/scholarworks-oai/) — OAI-PMH 2.0 metadata harvesting endpoint for AUB ScholarWorks. Identify returns repositoryName "AUB ScholarWorks", repositoryIdentifier…
+- [AUB Shibboleth Identity Provider (SAML 2.0)](https://apis.io/apis/aub/shibboleth-idp/) — AUB's own Shibboleth SAML 2.0 identity provider, the front door to campus single sign-on. The metadata endpoint serves a signed EntityDescriptor with…
+- [InCommon federation registration (AUB IdP)](https://apis.io/apis/aub/incommon-federation/) — AUB's identity provider is registered in InCommon, the United States research and education identity federation, and is resolvable through the InCommon…
+- [AUB Moodle Web Services (REST)](https://apis.io/apis/aub/moodle-webservices/) — AUB's learning management system is a Moodle instance the university hosts itself at lms.aub.edu.lb (moodle.aub.edu.lb is a CNAME to it), fronted by an AWS…
+- [AUB Moodle LTI 1.3 platform endpoints](https://apis.io/apis/aub/moodle-lti-platform/) — AUB's Moodle is configured as an IMS Global LTI 1.3 / LTI Advantage platform, and two of its platform endpoints are publicly reachable without credentials.…
+- [Crossref membership (AUB)](https://apis.io/apis/aub/crossref-member/) — AUB is a Crossref member in its own right — member id 13566, primary name "American University of Beirut", DOI prefix 10.63014. Probed against the Crossref…
+- [Handle System prefix 10938 (AUB ScholarWorks)](https://apis.io/apis/aub/handle-prefix/) — AUB holds Handle System prefix 10938, the persistent identifier namespace behind every AUB ScholarWorks record — the repository's OAI sample identifier is…
+- [ROR registration (AUB)](https://apis.io/apis/aub/ror-record/) — The American University of Beirut is registered in the Research Organization Registry as https://ror.org/04pznsd21. Three related AUB entities carry their…
+- [AUB Libraries discovery and management (Ex Libris Primo / Alma)](https://apis.io/apis/aub/library-discovery/) — AUB's library discovery and library services platform are Ex Libris products under AUB-specific tenancies: aub.primo.exlibrisgroup.com and…
+- [AUB Libraries LibGuides (Springshare)](https://apis.io/apis/aub/libguides/) — AUB Libraries runs a Springshare LibGuides estate at aub.edu.lb.libguides.com under site_id 4901 — the guides are AUB-authored (the ScholarWorks guide, an…
 
-## APIs
+### Published properties
 
-- **AUB ScholarWorks DSpace REST API** — Public HAL/JSON REST API for the institutional repository on DSpace 9.1. Base: `https://scholarworks.aub.edu.lb/server/api`. Docs: [LibGuide](https://aub.edu.lb.libguides.com/AUB-Scholarworks), [DSpace REST API](https://wiki.lyrasis.org/display/DSDOC9x/REST+API)
-- **AUB ScholarWorks OAI-PMH** — OAI-PMH 2.0 metadata harvesting endpoint. Base: `https://scholarworks.aub.edu.lb/server/oai/request`. Docs: [LibGuide](https://aub.edu.lb.libguides.com/AUB-Scholarworks)
-- **AUB Shibboleth Identity Provider (SAML 2.0)** — Institutional SSO identity provider with published SAML metadata. Endpoint: `https://idp.aub.edu.lb/idp/shibboleth`. Docs: [Service Desk](https://servicedesk.aub.edu.lb/TDClient/Requests/ServiceDet?ID=30424)
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Plans / Rate Limits / FinOps
+#### JSON-LD (1)
 
-- Plans & Pricing: [plans/aub-plans-pricing.yml](plans/aub-plans-pricing.yml)
-- Rate Limits: [rate-limits/aub-rate-limits.yml](rate-limits/aub-rate-limits.yml)
-- FinOps: [finops/aub-finops.yml](finops/aub-finops.yml)
+Linked-data contexts for the provider's vocabulary.
 
-## Timestamps
+- [Aub Context](https://apis.io/jsonld/aub/aub-context/)
 
-- Created: 2026-06-03
-- Modified: 2026-06-03
+#### Security (1)
 
-## Common Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- Website: https://www.aub.edu.lb/
-- GitHub: https://github.com/AUB-CMPS
-- LinkedIn: https://www.linkedin.com/school/american-university-of-beirut
-- Authentication: https://idp.aub.edu.lb/idp/shibboleth
-- Review: [review.yml](review.yml)
+- [Aub Domain Security](https://apis.io/security/aub/aub-domain-security/)
 
-## Notes
+#### Plans and pricing (1)
 
-All endpoints were probed live on 2026-06-03. The ScholarWorks REST root (`/server/api`) and OAI-PMH endpoint (`/server/oai/request`) both returned HTTP 200 and self-identify as repository "AUB ScholarWorks" on DSpace 9.1. The Shibboleth IdP metadata endpoint returned a valid SAML EntityDescriptor. Legacy DSpace paths (`/oai/request`, `/rest/`) return 404, consistent with DSpace 7+ moving these under `/server`. No private/SSO-gated systems (SIS, service desk) are cataloged as APIs since they are not publicly documented. No endpoints were fabricated. The `AUB-CMPS` GitHub org reflects the Computer Science department's course/community code, not an official institutional API program.
+Published plans, tiers and prices.
 
-## Maintainers
+- [Aub Plans Pricing](https://apis.io/plans/aub/aub-plans-pricing/)
 
-- Kin Lane — kin@apievangelist.com
+#### Rate limits (1)
+
+Published request limits.
+
+- [Aub Rate Limits](https://apis.io/rate-limits/aub/aub-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Aub Finops](https://apis.io/finops/aub/aub-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.aub.edu.lb/)
+- [Documentation](https://aub.edu.lb.libguides.com/AUB-Scholarworks)
+- [Support](https://servicedesk.aub.edu.lb/TDClient/1398/Portal/Home/)
+- [Privacy policy](https://www.aub.edu.lb/Pages/privacy.aspx)
+- [GitHub](https://github.com/AUB-CMPS)
+
+## API Evangelist rating
+
+**Kin Score 21.3** — emerging · rubric 0.24.0 · scored 2026-10-20
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 14.3 |
+| Contract governance | 18.2 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 21.4 |
+| Access clarity | 15.8 |
+
+**Agent readiness 3.5** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 22.5** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/aub/](https://apis.io/providers/aub/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for American University of Beirut: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/aub/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
